@@ -1,0 +1,46 @@
+
+<h4>Номер поїзда</h4>
+<textarea class="form-control" rows="1" name="newtrnum" #newtrnum="ngModel"  [(ngModel)]="newtrain.trainNumber"></textarea>
+<br>
+<h4>Назва маршрута поїзда</h4>
+<textarea class="form-control" rows="1" name="newtrname" #newtrname="ngModel"  [(ngModel)]="newtrain.nameRoute"></textarea>
+<br>
+
+<h4>Cтанції зупинки поїзда:</h4>
+    <table class='table table-striped' aria-labelledby="tableLabel">
+        <thead>
+          <tr>
+            <th>Назва станції</th>
+            <th>Час прибуття поїзда</th>
+            <th>Час відбуття поїзда</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="stations">
+          <tr *ngFor="let station of stations">
+            <td>{{ station.nameStation }}</td>
+            <td>{{ station.arrivalTime | date : 'HH:mm'}}</td>
+            <td>{{ station.departureTime | date : 'HH:mm'}}</td>
+          </tr>
+        </tbody>
+    </table>
+
+    <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="addStation">
+        <tbody>
+          <tr>
+            <td><textarea class="form-control" rows="1" name="nameStation" #nameStation="ngModel"  [(ngModel)]="newstation.nameStation"></textarea> </td>
+            <td><input class="form-control" type="datetime-local" [(ngModel)]="newstation.arrivalTime" placeholder='yyyy-MM-dd HH:mm' required /></td>
+            <td><input class="form-control" type="datetime-local" [(ngModel)]="newstation.departureTime" placeholder='yyyy-MM-dd HH:mm' required /></td>
+          </tr>
+        </tbody>
+    </table>
+
+<button type="button" class="btn btn-secondary" (click)="startAddStations()">Додати станцію</button>
+<button type="button" class="btn btn-primary" (click)="addStations()">Зберегти станцію</button>
+
+<br>
+<br>
+<button type="button" class="btn btn-success" (click)="adAllTrain()">Додати поїзд</button>
+
+
+
+

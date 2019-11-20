@@ -1,0 +1,32 @@
+<h1 id="tableLabel">Розклад руху поїздів</h1>
+
+<p>Оберіть маршрут поїзда:</p>
+
+<p *ngIf="!serviceTrain.trains"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="serviceTrain.trains">
+  <thead>
+    <tr>
+      <th>Номер поїзда</th>
+      <th>Назва маршрут</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let train of serviceTrain.trains">
+      <td (click)="populateForm(train)">{{ train.trainNumber }}</td>
+      <td (click)="populateForm(train)">{{ train.nameRoute }} </td>
+      <td>
+        <button type="button" class="btn btn-primary" (click)="setTrain(train)" [routerLink]="['/trainedit/', train.trainNumber]" routerLinkActive='active'>Змiнити назву</button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-danger" (click)="onDelete(train.trainNumber)">Видалити поїзд</button>  <!-- Для удаления элемента -корзина- передача в метод onDelete Id-->
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+  <button type="button" class="btn btn-success" [routerLink]="['/trainadd/']" routerLinkActive='active'>Додати поїзд</button>
+
+
+
